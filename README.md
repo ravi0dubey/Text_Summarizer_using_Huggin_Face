@@ -33,9 +33,12 @@ Terraform </br>
 
 
 ## How to run  
-1. conda create -n signLanguage python=3.7 -y  </br>
-2. conda activate signLanguage </br>
+1. conda create -n textsum python=3.8 -y  </br>
+2. conda activate textsum </br>
 3. pip install -r requirements.txt </br>
+4. pip install --upgrade accelerate </br>
+5. pip uninstall -y transformers accelerate </br>
+6. pip install transformers accelerate </br>
 4. python main.py </br>
 5. open in browser: http://localhost:8080/ </br>
 6. To do the object detection for a static image upload the image and it will predict the sign language </br>
