@@ -58,10 +58,10 @@ Surrey Place is seeking a Data Scientist .<n>The successful applicant will repor
 </br>
 ![image](https://github.com/ravi0dubey/Text_Summarizer_using_Hugging_Face/assets/38419795/89163454-f442-4e56-9577-2f0a17b476aa)
 
-</br>
 
 
-# How project was designed and build
+
+## How project was designed and build
 1. Write **template.p**y which create a folder structure of our project. Within each folders, it will create the filenames where we will be writing our code. </br>
 2. **setup.py** file is created where we write statement so that signLanguage folder will behave as libraries </br>
 3. **Logger** module is created to write log activities respectively</br>
