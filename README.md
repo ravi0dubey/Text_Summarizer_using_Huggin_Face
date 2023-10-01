@@ -48,6 +48,14 @@ Training logs
 Training results
 ![image](https://github.com/ravi0dubey/Text_Summarizer_using_Hugging_Face/assets/38419795/f8b9a816-1531-4a7a-9a3d-fc8cec8d8389)
 
+**Prediction**
+**Input text given for summarization:**
+Surrey Place is seeking a Data Scientist. The successful applicant will report to the VP, Adult Services. This position will work with both internal and external databases. Internally, this position will design data models and analyze existing data to address gaps in clinical services and forecast future needs. This position will also work with external data sets to address questions related to the broader service sector.
+
+**Summarized text given by model :**
+Surrey Place is seeking a Data Scientist .<n>The successful applicant will report to the VP, Adult Services .<n>This position will work with both internal and external databases .
+
+![image](https://github.com/ravi0dubey/Text_Summarizer_using_Hugging_Face/assets/38419795/89163454-f442-4e56-9577-2f0a17b476aa)
 
 
 ## How project was designed and build
