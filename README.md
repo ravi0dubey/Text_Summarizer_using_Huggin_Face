@@ -1,7 +1,45 @@
 # Text_Summarizer_using_Hugging_Face
 
-Text summarization project is implemented using Hugging Face Library.
 
+
+## Problem Statement
+
+In this busy world we donot have time to go over long text or para, especially in corporate world where we have long emails. On an average if someone need to go over 50 emails a day he/she needs a solution where in entire content of email is summarized which not only saves time but also help to take quick decision. </br>
+
+Constraint is that summary of email needs to be small but should incorporate the complete jist without missing any valuable information.
+
+
+## Solution Proposed
+
+To solve the problem we have implemented Text summarization project using Hugging Face Library.
 **Model** used is google/**pegasus-cnn_dailymail** </br>
 **Dataset** used is samsum from the huggingface library, https://huggingface.co/datasets/samsum </br>. 
 Data is converted into .csv format as well as the one which is ready to be used by Hugging Face and stored in https://github.com/ravi0dubey/Dataset/raw/main/summarizer-data.zip </br>
+
+
+## Tech Stack Used
+Python </br>
+FastAPI </br>
+Yolov5 algorithms </br>
+Docker </br>
+
+
+## Infrastructure Required.
+AWS S3 </br>
+AWS EC2 </br>
+AWS ECR </br>
+Git Actions </br>
+Terraform </br>
+
+
+## How to run  
+1. conda create -n signLanguage python=3.7 -y  </br>
+2. conda activate signLanguage </br>
+3. pip install -r requirements.txt </br>
+4. python main.py </br>
+5. open in browser: http://localhost:8080/ </br>
+6. To do the object detection for a static image upload the image and it will predict the sign language </br>
+7. To do the sign language prediction, live, change the url in the browser to : http://localhost:8080/train/live </br>
+6. To the train the model change the url in the browser to : http://localhost:8080/train </br>
+
+## Sign Language Project run results
