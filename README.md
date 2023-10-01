@@ -39,7 +39,7 @@ Terraform </br>
 4. pip install --upgrade accelerate </br>
 5. pip uninstall -y transformers accelerate </br>
 6. pip install transformers accelerate </br>
-4. python main.py </br>
+4. python app.py </br>
 
 ## Text Summarization Project run results
 
@@ -56,7 +56,7 @@ Terraform </br>
   c. **configurations->s3_operations.py ->** It has **upload_file** method to push the model to s3 bucket based on the s3-bucket name declared in the project  </br> </br>
   d. **components ->**  </br>
           i. **data_ingestion.py ->**  will fetch input sign language data from github repo, unzip it and divide images into train and test folder </br>
-            It will return data_zile_file_path and feature_store_path as its artifact. Feature_store_path contains train(folder), test(folder) and data.yaml file  </br>
+            It will return data_zile_file_path and feature_store_path as its artifact. Feature_store_path contains train(folder), test(folder) and **data.yaml** file  </br>
          ii. **data_validation.py ->** which will read the artifacts of data_ingestion and validate that it has 3 necessary components received from data_ingestion(train, test and data.yaml file) </br>.
             It will return validation_status as its artifact </br>
         iii. **model_trainer.py ->** If validation status from data_validation.py is True then it will download the modelweights from YOLOV5S and it will train the model on the sign language data using the number of epochs mentioned. I have trained using 300 epochs</br>
