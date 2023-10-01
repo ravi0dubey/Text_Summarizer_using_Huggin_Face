@@ -40,9 +40,5 @@ Terraform </br>
 5. pip uninstall -y transformers accelerate </br>
 6. pip install transformers accelerate </br>
 4. python main.py </br>
-5. open in browser: http://localhost:8080/ </br>
-6. To do the object detection for a static image upload the image and it will predict the sign language </br>
-7. To do the sign language prediction, live, change the url in the browser to : http://localhost:8080/train/live </br>
-6. To the train the model change the url in the browser to : http://localhost:8080/train </br>
 
 ## Sign Language Project run results
