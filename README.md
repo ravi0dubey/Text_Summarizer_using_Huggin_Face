@@ -41,4 +41,29 @@ Terraform </br>
 6. pip install transformers accelerate </br>
 4. python main.py </br>
 
-## Sign Language Project run results
+## Text Summarization Project run results
+
+## How project was designed and build
+1. Write **template.p**y which create a folder structure of our project. Within each folders, it will create the filenames where we will be writing our code. </br>
+2. **setup.py** file is created where we write statement so that signLanguage folder will behave as libraries </br>
+3. **Logger** module is created to write log activities respectively</br>
+4. All common functionality like reading/writing of yaml files are written in utils>main.py  </br>
+5. Steps to create the project. We will write code in following order for better structure </br>
+  a. **Constants ->** We will first declare all constants variable to be used by each individual components in constant->training_pipeline->__init__.py  </br> </br>
+  b. **entity ->**  </br>
+              i. We will declare dataclass for each components in entity->config_entity.py </br>
+              ii. We will declare artifacts which each components will be generating in  entity->artifact_entity.py </br> </br>
+  c. **configurations->s3_operations.py ->** It has **upload_file** method to push the model to s3 bucket based on the s3-bucket name declared in the project  </br> </br>
+  d. **components ->**  </br>
+          i. **data_ingestion.py ->**  will fetch input sign language data from github repo, unzip it and divide images into train and test folder </br>
+            It will return data_zile_file_path and feature_store_path as its artifact. Feature_store_path contains train(folder), test(folder) and data.yaml file  </br>
+         ii. **data_validation.py ->** which will read the artifacts of data_ingestion and validate that it has 3 necessary components received from data_ingestion(train, test and data.yaml file) </br>.
+            It will return validation_status as its artifact </br>
+        iii. **model_trainer.py ->** If validation status from data_validation.py is True then it will download the modelweights from YOLOV5S and it will train the model on the sign language data using the number of epochs mentioned. I have trained using 300 epochs</br>
+         iv. **model_pusher.py ->** If validation status from data_validation.py is True then it will call upload_file method of configurations-> s3_operations.py to push the trained model best.pt to **S3 bucket** for future usage  </br> </br>
+         
+   e. **pipeline ->** </br>
+      i. **application.py** -> it stores the configuration of host and port number on which the project will run </br></br>
+     ii. **training_pipeline.py ->** will call each components of the project(mentioned above) in sequence </br> </br>
+   
+   f. **app.py ->**  It is the main driver part of the application which calls the pipeline for training and prediction </br>
