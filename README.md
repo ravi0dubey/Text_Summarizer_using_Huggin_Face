@@ -47,7 +47,7 @@ Terraform </br>
 1. Write **template.p**y which create a folder structure of our project. Within each folders, it will create the filenames where we will be writing our code. </br>
 2. **setup.py** file is created where we write statement so that signLanguage folder will behave as libraries </br>
 3. **Logger** module is created to write log activities respectively</br>
-4. All common functionality like reading/writing of yaml files are written in utils>main.py  </br>
+4. All common functionality like reading/writing of yaml files are written in **utils>main.py**  </br>
 5. Steps to create the project. We will write code in following order for better structure </br>
   a. **Constants ->** We will first declare all constants variable to be used by each individual components in constant->training_pipeline->__init__.py  </br> </br>
   b. **entity ->**  </br>
