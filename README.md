@@ -42,28 +42,40 @@ Terraform </br>
 4. python app.py </br>
 
 ## Text Summarization Project run results
+Training logs
+![image](https://github.com/ravi0dubey/Text_Summarizer_using_Hugging_Face/assets/38419795/fc1ffe55-2f96-4593-8cdd-c3f9683ded64)
+
 
 ## How project was designed and build
 1. Write **template.p**y which create a folder structure of our project. Within each folders, it will create the filenames where we will be writing our code. </br>
 2. **setup.py** file is created where we write statement so that signLanguage folder will behave as libraries </br>
 3. **Logger** module is created to write log activities respectively</br>
-4. All common functionality like reading/writing of yaml files are written in **utils>main.py**  </br>
-5. Steps to create the project. We will write code in following order for better structure </br>
-  a. **Constants ->** We will first declare all constants variable to be used by each individual components in constant->training_pipeline->__init__.py  </br> </br>
-  b. **entity ->**  </br>
-              i. We will declare dataclass for each components in entity->config_entity.py </br>
-              ii. We will declare artifacts which each components will be generating in  entity->artifact_entity.py </br> </br>
-  c. **configurations->s3_operations.py ->** It has **upload_file** method to push the model to s3 bucket based on the s3-bucket name declared in the project  </br> </br>
-  d. **components ->**  </br>
-          i. **data_ingestion.py ->**  will fetch input sign language data from github repo, unzip it and divide images into train and test folder </br>
-            It will return data_zile_file_path and feature_store_path as its artifact. Feature_store_path contains train(folder), test(folder) and **data.yaml** file  </br>
-         ii. **data_validation.py ->** which will read the artifacts of data_ingestion and validate that it has 3 necessary components received from data_ingestion(train, test and data.yaml file) </br>.
-            It will return validation_status as its artifact </br>
-        iii. **model_trainer.py ->** If validation status from data_validation.py is True then it will download the modelweights from YOLOV5S and it will train the model on the sign language data using the number of epochs mentioned. I have trained using 300 epochs</br>
-         iv. **model_pusher.py ->** If validation status from data_validation.py is True then it will call upload_file method of configurations-> s3_operations.py to push the trained model best.pt to **S3 bucket** for future usage  </br> </br>
+4. **config->config.yaml** contains all the constant variables declared over here which will be used by all major components in step **6 e**.
+5. **params.yaml** -> it contains the training parameters declared over here
+6. **src->text_summarizer->** Steps to create the project. We will write code in following order for better structure under  </br>
+  a.  **config-> configuration.py ->** It has returns all the artifacts of each components module detailed below  </br> </br>
+  b. **Constants->__init__.py** it contains the  config_file_path(config->config.yaml) and params_file_path(params.yaml) </br> </br>
+  c. **entity->__init__.py**  We will declare dataclass for each components in entity->config_entity.py </br>
+  d. **utils>main.py** All common functionality like reading/writing of yaml files are written in   </br>          
+  e. **components ->**  </br>
+          i. **data_ingestion.py ->**  will fetch input data kept in github repo and store it in data.zip folder. Then it will unzip the data.zip folder into train,test and validation folder with respective data into it. </br>
+            It will return url of data, root directory, data_zile_file_path and data_ingestion_path as its artifact. data_ingestion folder contains train(folder), test(folder) and **validation(folder)**   </br>
+         ii. **data_validation.py ->** which will read the artifacts of data_ingestion and validate that it has 3 necessary folders in the data_ingestion/samsun_dataset, train, test and validation folders. If yes then it will write "True" in status.txt signalling all
+             is good </br>.It will return root directory, status_file and all_required_files as its artifact </br>
+         iii. **data_transformation.py ->** which will read the artifacts of data_validation and apply embeddings on the entire samsun dataset to convert it to numbers.  </br>.
+               After applying  embedding technique we have 3 additional columns( input_ids, attention_mask and labels). Attention_mask signifies which word in the text has more significance i.e. "Ravi need help.""  in this case "Ravi" and "help" has more attention 
+               compared to "need" hence attention mask will have value '1',0,1 with 1 signifiying higher or more attention and 0 = no attention </br>
+              It will return root directory of artifacts and each folder(Train, test and validations) will have embedded data </br>
+        iii. **model_trainer.py ->**  Data Collator is used to take data in batches instead of taking complete data at once. Sequence2sequence is used to train the models in 1 epochs</br>
+         iv. **model_evaluation.py ->** Once model is trained then evaluation is done to see the accuracy and loss </br> </br>
          
-   e. **pipeline ->** </br>
-      i. **application.py** -> it stores the configuration of host and port number on which the project will run </br></br>
-     ii. **training_pipeline.py ->** will call each components of the project(mentioned above) in sequence </br> </br>
-   
-   f. **app.py ->**  It is the main driver part of the application which calls the pipeline for training and prediction </br>
+   f. **pipeline ->** </br>
+      i. **stage_01_data_ingestion.py** -> it will call data_ingestion.py </br></br>
+     ii. **stage_02_data_validation.py** -> it will call data_validation.py </br></br>
+    iii. **stage_03_data_transformation.py** -> it will call data_transformation.py </br></br>
+    iv. **stage_04_model_trainer.py** -> it will call model_trainer.py </br></br>
+    v. **stage_05_model_evaluation.py** -> it will call model_evaluation.py </br></br>
+    vi. **prediction.py** -> it gets triggered from app.py when predict is chosen. It does the actual prediction i.e Text summarization</br></br>
+
+7. **mainpy ->**  It calls all the pipeline for training except the prediction </br>
+8. **app.py ->**  It is the main driver part of the application which calls the main.py for training and call prediction.py for prediction </br>
