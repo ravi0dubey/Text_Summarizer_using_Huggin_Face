@@ -45,6 +45,10 @@ Terraform </br>
 Training logs
 ![image](https://github.com/ravi0dubey/Text_Summarizer_using_Hugging_Face/assets/38419795/fc1ffe55-2f96-4593-8cdd-c3f9683ded64)
 
+Training results
+![image](https://github.com/ravi0dubey/Text_Summarizer_using_Hugging_Face/assets/38419795/f8b9a816-1531-4a7a-9a3d-fc8cec8d8389)
+
+
 
 ## How project was designed and build
 1. Write **template.p**y which create a folder structure of our project. Within each folders, it will create the filenames where we will be writing our code. </br>
