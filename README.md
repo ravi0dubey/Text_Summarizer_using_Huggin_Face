@@ -1,1 +1,1 @@
-# Text_Summarizer_using_Huggin_Face
+# Text_Summarizer_using_Hugging_Face
